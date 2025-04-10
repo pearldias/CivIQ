@@ -1,39 +1,9 @@
-
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // Add this import
 
 const Home = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.src = "https://cdn.botpress.cloud/webchat/v2.3/inject.js";
-    script1.async = true;
-
-    script1.onload = () => {
-      const script2 = document.createElement("script");
-      script2.src =
-        "https://files.bpcontent.cloud/2025/04/10/12/20250410123106-I318OB4E.js";
-      script2.async = true;
-      document.body.appendChild(script2);
-      script2.dataset.cleanup = "true";
-    };
-
-    document.body.appendChild(script1);
-
-    return () => {
-      const scripts = document.querySelectorAll("script");
-      scripts.forEach((s) => {
-        if (
-          s.src.includes("botpress.cloud") ||
-          s.dataset.cleanup === "true"
-        ) {
-          s.remove();
-        }
-      });
-    };
-  }, []);
 
   return (
     <div className="home-container">
@@ -48,6 +18,10 @@ const Home = () => {
       >
         Make Complaint
       </button>
+
+      <button type="button" className="submit-button">Check Status</button>
+
+      <button className="submit-button">Community</button>
     </div>
   );
 };

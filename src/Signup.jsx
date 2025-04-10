@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { db } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { setDoc, doc } from "firebase/firestore";
-
+import './Signup.css'
 const auth = getAuth(app);
 
 export default function Signup() {
@@ -39,11 +39,11 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup-page">
-      <form className="signup-content" onSubmit={createUser}>
-        <h1>Sign Up</h1>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={createUser}>
+        <h1 className="signup-title">Sign Up</h1>
 
-        <div className="signup-name">
+        <div>
           <input
             type="text"
             autoComplete="off"
@@ -51,10 +51,11 @@ export default function Signup() {
             onChange={(e) => setName(e.target.value)}
             value={name}
             required
+            className="signup-input"
           />
         </div>
 
-        <div className="signup-email">
+        <div>
           <input
             type="email"
             autoComplete="off"
@@ -62,10 +63,11 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            className="signup-input"
           />
         </div>
 
-        <div className="signup-password">
+        <div>
           <input
             type="password"
             autoComplete="off"
@@ -73,10 +75,11 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            className="signup-input"
           />
         </div>
 
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className="signup-button">
           {isLoading ? "Loading..." : "Sign Up"}
         </button>
       </form>

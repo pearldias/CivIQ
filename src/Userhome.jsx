@@ -9,11 +9,11 @@ const UserHome = () => {
         <div className="user-home-content">
           <h1>Welcome</h1>
           <div className="user-home-buttons">
-            <Link to="/signin">
+            <Link to="/signup">
             <button className="signup-btn">Sign Up</button>
             </Link>
             
-            <Link to="/signup">
+            <Link to="/signin">
              <button className="signin-btn">Sign In</button> 
             </Link>
 
