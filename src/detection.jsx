@@ -123,9 +123,9 @@ const PotholeDetection = () => {
         >
           <option value="">Select Issue Type</option>
           <option value="Pothole">Pothole</option>
-          <option value="Broken Streetlight">Broken Streetlight</option>
+          <option value="broken street light">Broken Streetlight</option>
           <option value="Fallen Trees">Fallen Trees</option>
-          <option value="Garbage Dump">Garbage Dump</option>
+          <option value="Garbage Dumping">Garbage Dump</option>
           <option value="Water Leak">Water Leak</option>
         </select>
         <input type="file" onChange={handleImageUpload} className="form-file-input"/>

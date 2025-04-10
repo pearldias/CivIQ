@@ -59,64 +59,191 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
+    <div style={styles.container}>
+      <h1 style={styles.header}>Admin Dashboard</h1>
 
-      {/* Dropdown to select department */}
-      <label htmlFor="department-filter">Filter by Department:</label>
-      <select
-        id="department-filter"
-        value={selectedDepartment}
-        onChange={(e) => filterByDepartment(e.target.value)}
-      >
-        <option value="All">All</option>
-        <option value="PWD">PWD</option>
-        <option value="Electricity Department">Electricity Department</option>
-        <option value="Water Resources Department">Water Resources Department</option>
-        <option value="Local Municipality">Local Municipality</option>
-      </select>
+      {/* Department Filter */}
+      <div style={styles.filterContainer}>
+        <label htmlFor="department-filter" style={styles.label}>Filter by Department:</label>
+        <select
+          id="department-filter"
+          value={selectedDepartment}
+          onChange={(e) => filterByDepartment(e.target.value)}
+          style={styles.select}
+        >
+          <option value="All">All</option>
+          <option value="PWD">PWD</option>
+          <option value="Electricity Department">Electricity Department</option>
+          <option value="Water Resources Department">Water Resources Department</option>
+          <option value="Local Municipality">Local Municipality</option>
+        </select>
+      </div>
 
-      {/* Complaints list */}
-      <div>
+      {/* Complaints List */}
+      <div style={styles.complaintsList}>
         {filteredComplaints.length > 0 ? (
           filteredComplaints.map((complaint) => (
-            <div key={complaint.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-              <h3>{complaint.type}</h3>
+            <div key={complaint.id} style={styles.complaintCard}>
+              <h3 style={styles.complaintTitle}>{complaint.type}</h3>
               <p><strong>Location:</strong> {complaint.location}</p>
               <p><strong>Date:</strong> {complaint.reg_date}</p>
               <p><strong>Department:</strong> {complaint.department}</p>
               <p><strong>Status:</strong> {complaint.status}</p>
-              {complaint.imageURL && <img src={complaint.imageURL} alt="Complaint" style={{ width: "100px", height: "auto" }} />}
-              
+              {complaint.imageURL && <img src={complaint.imageURL} alt="Complaint" style={styles.image} />}
+
               {/* Edit Status */}
               {editStatus.id === complaint.id ? (
-                <div>
+                <div style={styles.editStatusContainer}>
                   <input
                     type="text"
                     value={editStatus.status}
                     onChange={(e) => setEditStatus({ ...editStatus, status: e.target.value })}
+                    style={styles.input}
                   />
-                  <button onClick={() => updateStatus(complaint.id)}>Save</button>
-                  <button onClick={() => setEditStatus({ id: null, status: "" })}>Cancel</button>
+                  <div style={styles.buttonContainer}>
+                    <button onClick={() => updateStatus(complaint.id)} style={styles.saveButton}>Save</button>
+                    <button onClick={() => setEditStatus({ id: null, status: "" })} style={styles.cancelButton}>Cancel</button>
+                  </div>
                 </div>
               ) : (
-                <button onClick={() => setEditStatus({ id: complaint.id, status: complaint.status })}>
-                  Edit Status
-                </button>
+                <div style={styles.buttonContainer}>
+                  <button onClick={() => setEditStatus({ id: complaint.id, status: complaint.status })} style={styles.editButton}>
+                    Edit Status
+                  </button>
+                </div>
               )}
 
               {/* Delete Complaint */}
-              <button onClick={() => deleteComplaint(complaint.id)} style={{ color: "red" }}>
-                Delete
-              </button>
+              <div style={styles.buttonContainer}>
+                <button onClick={() => deleteComplaint(complaint.id)} style={styles.deleteButton}>
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         ) : (
-          <p>No complaints available.</p>
+          <p style={styles.noComplaints}>No complaints available.</p>
         )}
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#f4f6f8',
+    minHeight: '100vh',
+  },
+  header: {
+    textAlign: 'center',
+    color: '#333',
+    fontSize: '36px',
+    marginBottom: '20px',
+  },
+  filterContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '20px',
+  },
+  label: {
+    fontSize: '16px',
+    marginRight: '10px',
+    color: '#555',
+  },
+  select: {
+    padding: '8px',
+    fontSize: '16px',
+    borderRadius: '8px',
+    border: '1px solid #ddd',
+    width: '250px',
+  },
+  complaintsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  complaintCard: {
+    backgroundColor: '#fff',
+    padding: '20px',
+    marginBottom: '20px',
+    borderRadius: '10px',
+    width: '80%',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.2s',
+  },
+  complaintTitle: {
+    color: '#333',
+    fontSize: '24px',
+    marginBottom: '10px',
+  },
+  image: {
+    width: '100px',
+    height: 'auto',
+    marginTop: '10px',
+    borderRadius: '8px',
+  },
+  editStatusContainer: {
+    marginTop: '10px',
+    display: 'flex',
+    gap: '5px',
+  },
+  input: {
+    padding: '8px',
+    fontSize: '16px',
+    borderRadius: '8px',
+    border: '1px solid #ddd',
+    flex: '1',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '10px',
+    width: '100%',
+  },
+  saveButton: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    padding: '10px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  cancelButton: {
+    backgroundColor: '#f44336',
+    color: 'white',
+    padding: '10px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  editButton: {
+    backgroundColor: '#ff9800',
+    color: 'white',
+    padding: '10px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  deleteButton: {
+    backgroundColor: '#f44336',
+    color: 'white',
+    padding: '10px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    marginTop: '5px',
+    transition: 'background-color 0.3s',
+  },
+  noComplaints: {
+    textAlign: 'center',
+    fontSize: '18px',
+    color: '#888',
+  },
 };
 
 export default AdminPage;
