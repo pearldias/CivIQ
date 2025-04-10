@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as tmImage from "@teachablemachine/image";
 import { db } from "./firebase";
 import { collection, addDoc } from "firebase/firestore";
-
+import  './detection.css';
 const PotholeDetection = () => {
   const [model, setModel] = useState(null);
   const [prediction, setPrediction] = useState([]);
@@ -202,7 +202,7 @@ const PotholeDetection = () => {
           readOnly
           className="form-input"
         />
-        <button type="button" onClick={() => setShowMap(!showMap)}>
+        <button type="button" className="submit-button" onClick={() => setShowMap(!showMap)}>
           {showMap ? "Close Map" : "Select Location on Map"}
         </button>
         {showMap && <div id="map" style={{ height: "400px", width: "100%" }} />}

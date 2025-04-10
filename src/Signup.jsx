@@ -19,18 +19,16 @@ export default function Signup() {
     try {
       setIsLoading(true);
 
-      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Store user info in Firestore with UID as doc ID
       await setDoc(doc(db, "Users", user.uid), {
         Name: name,
         Email: email,
         createdAt: new Date(),
       });
 
-      navigate("/Home");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error.message);
     } finally {
@@ -38,49 +36,116 @@ export default function Signup() {
     }
   };
 
-  return (
-    <div className="signup-container">
-      <form className="signup-form" onSubmit={createUser}>
-        <h1 className="signup-title">Sign Up</h1>
+  const styles = {
+    container: {
+      minHeight: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "linear-gradient(135deg, #e0f7fa, #ffffff)",
+      padding: "20px",
+    },
+    form: {
+      backgroundColor: "#ffffff",
+      padding: "40px",
+      width: "100%",
+      maxWidth: "420px",
+      borderRadius: "16px",
+      boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+      textAlign: "center",
+    },
+    title: {
+      fontSize: "28px",
+      fontWeight: "bold",
+      marginBottom: "8px",
+      color: "#333",
+    },
+    subtitle: {
+      fontSize: "16px",
+      color: "#777",
+      marginBottom: "24px",
+    },
+    inputGroup: {
+      textAlign: "left",
+      marginBottom: "20px",
+    },
+    label: {
+      fontSize: "14px",
+      marginBottom: "6px",
+      display: "block",
+      color: "#333",
+    },
+    input: {
+      width: "100%",
+      padding: "10px 14px",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      fontSize: "14px",
+      transition: "border 0.3s ease",
+    },
+    button: {
+      width: "100%",
+      padding: "12px",
+      backgroundColor: "#00bcd4",
+      color: "white",
+      border: "none",
+      borderRadius: "8px",
+      fontSize: "16px",
+      cursor: "pointer",
+      marginTop: "10px",
+      transition: "background 0.3s ease",
+    },
+    linkText: {
+      marginTop: "20px",
+      fontSize: "14px",
+      color: "#555",
+    },
+  };
 
-        <div>
+  return (
+    <div style={styles.container}>
+      <form style={styles.form} onSubmit={createUser}>
+        <h1 style={styles.title}>Create Account</h1>
+        <p style={styles.subtitle}>Let's get you started</p>
+
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Full Name</label>
           <input
             type="text"
-            autoComplete="off"
             placeholder="Enter your name"
             onChange={(e) => setName(e.target.value)}
             value={name}
             required
-            className="signup-input"
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Email</label>
           <input
             type="email"
-            autoComplete="off"
             placeholder="Enter your email id"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
-            className="signup-input"
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Password</label>
           <input
             type="password"
-            autoComplete="off"
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
-            className="signup-input"
+            style={styles.input}
           />
         </div>
 
-        <button type="submit" disabled={isLoading} className="signup-button">
-          {isLoading ? "Loading..." : "Sign Up"}
+        <button type="submit" disabled={isLoading} style={styles.button}>
+          {isLoading ? "Creating..." : "Sign Up"}
         </button>
       </form>
     </div>

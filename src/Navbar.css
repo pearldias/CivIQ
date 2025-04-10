@@ -1,0 +1,42 @@
+/* Navbar container */
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #4a90e2;
+  padding: 10px 20px;
+}
+
+/* Navbar list */
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+/* Navbar list items */
+.navigation li {
+  display: inline;
+}
+
+/* Navbar links */
+.navigation a.nv {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  
+}
+
+/* Active link */
+.navigation a.nv.active {
+  background-color: #7eaee5;
+  border-radius: 5px;
+}
+
+/* Hover effect */
+.navigation a.nv:hover {
+  background-color: #7db5f5;
+  border-radius: 5px;
+}
