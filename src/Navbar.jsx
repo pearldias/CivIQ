@@ -34,6 +34,12 @@ export default function Navbar() {
                 Check Status
             </NavLink>
         </li>
+
+        <li>
+            <NavLink to="/Analytics" className={({ isActive }) => (isActive ? "nv active" : "nv")}>
+                Analytics
+            </NavLink>
+        </li>
       </ul>
     </nav>
   );

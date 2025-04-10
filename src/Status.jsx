@@ -2,7 +2,7 @@ export default function Status(){
 
     return(
         <>
-            <h1>hi</h1>
+            <h1>Status</h1>
         </>
     )
 }

@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import * as tmImage from "@teachablemachine/image";
 import { db } from "./firebase";
 import { collection, addDoc } from "firebase/firestore";
+import {getAuth} from "firebase/auth"
+import { useAuth } from "./AuthContext";
+
+
 import  './detection.css';
 const PotholeDetection = () => {
+  const {user}=useAuth();
+  console.log(user.email);
   const [model, setModel] = useState(null);
   const [prediction, setPrediction] = useState([]);
   const [image, setImage] = useState(null);
@@ -18,6 +24,7 @@ const PotholeDetection = () => {
     department: "PWD",
     status: "Pending",
     imageURL: "",
+    user: user?.email||""
   });
 
   const departmentMapping = {
@@ -224,6 +231,7 @@ const PotholeDetection = () => {
       </form>
       {image && <img src={image} alt="Uploaded" />}
       {isLoading && <p>Loading...</p>}
+      
     </div>
   );
 };

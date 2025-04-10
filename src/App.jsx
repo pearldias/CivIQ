@@ -9,10 +9,11 @@ import Admin from "./Admin";
 import Community from "./Community";
 import Navbar from "./Navbar";
 import Status from "./Status";
+import Analytics from  "./Analytics";
 function Layout() {
   const location = useLocation();
-  const hideNavbar = location.pathname === "/signin" || location.pathname === "/signup";
-
+  const hideNavbar = location.pathname === "/signin" || location.pathname === "/signup" || location.pathname==="/" || location.pathname==="/Admin";
+  
   return (
     <>
       {!hideNavbar && <Navbar />}
@@ -24,7 +25,8 @@ function Layout() {
         <Route path="/Complain" element={<Detection />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/Community" element={<Community />} />
-        <Route path="Status" element={<Status/>}/>
+        <Route path="/Status" element={<Status/>}/>
+        <Route path="/Analytics" element={<Analytics/>}/>
       </Routes>
     </>
   );
