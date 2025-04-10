@@ -19,7 +19,7 @@ export default function Signin() {
     try {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/Home");
+      navigate("/home"); // Navigate to Home (root)
     } catch (err) {
       console.log("Error:", err.message);
     } finally {
